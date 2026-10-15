@@ -33,3 +33,10 @@ Characters of **Ambiguous** width (many emoji, some punctuation) are treated as 
 - \`render_table(columns, rows)` — convenience function building and rendering in one call.
 
 Standard library only. No dependencies.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
